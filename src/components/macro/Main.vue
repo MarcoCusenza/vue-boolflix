@@ -1,16 +1,19 @@
 <template>
   <main>
     <Searchbar />
+    <ContentsList />
   </main>
 </template>
 
 <script>
 import Searchbar from "../commons/Searchbar.vue";
+import ContentsList from "../sections/ContentsList.vue";
 
 export default {
   name: "Main",
   components: {
     Searchbar,
+    ContentsList,
   },
 };
 </script>
