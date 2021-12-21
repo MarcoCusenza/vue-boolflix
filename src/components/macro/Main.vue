@@ -1,19 +1,24 @@
 <template>
   <main>
     <Searchbar />
-    <ContentsList />
+    <h3>Lista di film</h3>
+    <MoviesList />
+    <h3>Lista di serie</h3>
+    <SeriesList />
   </main>
 </template>
 
 <script>
 import Searchbar from "../commons/Searchbar.vue";
-import ContentsList from "../sections/ContentsList.vue";
+import MoviesList from "../sections/MoviesList.vue";
+import SeriesList from "../sections/SeriesList.vue";
 
 export default {
   name: "Main",
   components: {
     Searchbar,
-    ContentsList,
+    MoviesList,
+    SeriesList,
   },
 };
 </script>

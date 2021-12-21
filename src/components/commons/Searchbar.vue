@@ -8,7 +8,7 @@
         id="searchbar"
         v-model="dataShared.selectVal"
       />
-      <button @click="callApi()">Cerca</button>
+      <button @click="callApiMovies(), callApiSeries()">Cerca</button>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
     };
   },
   methods: {
-    callApi() {
+    callApiMovies() {
       axios
         .get("https://api.themoviedb.org/3/search/movie", {
           params: {
@@ -35,7 +35,24 @@ export default {
           },
         })
         .then(function (response) {
-          dataShared.contents = response.data.results;
+          dataShared.movies = response.data.results;
+          console.log(response.data.results);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    callApiSeries() {
+      axios
+        .get("https://api.themoviedb.org/3/search/tv", {
+          params: {
+            api_key: "a0340a46fd6f1a725803d54dae267563",
+            query: dataShared.selectVal,
+            language: "it-IT",
+          },
+        })
+        .then(function (response) {
+          dataShared.series = response.data.results;
           console.log(response.data.results);
         })
         .catch(function (error) {
