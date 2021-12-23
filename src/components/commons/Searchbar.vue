@@ -1,12 +1,13 @@
 <template>
   <div class="searchbar-container">
-    <h2>Cerca un film</h2>
+    <h2>Cerca un contenuto</h2>
     <div class="search-area">
       <input
         type="text"
         name="searchbar"
         id="searchbar"
         v-model="dataShared.selectVal"
+        @keypress.enter="callApiMovies(), callApiSeries()"
       />
       <button @click="callApiMovies(), callApiSeries()">Cerca</button>
     </div>
@@ -36,7 +37,7 @@ export default {
         })
         .then(function (response) {
           dataShared.movies = response.data.results;
-          console.log(response.data.results);
+          // console.log(response.data.results);
         })
         .catch(function (error) {
           console.log(error);
@@ -53,7 +54,7 @@ export default {
         })
         .then(function (response) {
           dataShared.series = response.data.results;
-          console.log(response.data.results);
+          // console.log(response.data.results);
         })
         .catch(function (error) {
           console.log(error);
@@ -75,6 +76,12 @@ export default {
 
   .search-area * {
     margin: $small-space;
+    font-size: $normal-text;
+
+    button {
+      font-family: 'Courier New', Courier, monospace !important;
+      font-size: 4px !important;
+    }
   }
 }
 </style>

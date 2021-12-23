@@ -1,9 +1,7 @@
 <template>
   <main>
     <Searchbar />
-    <h3>Lista di film</h3>
     <MoviesList />
-    <h3>Lista di serie</h3>
     <SeriesList />
   </main>
 </template>
