@@ -2,6 +2,9 @@
   <div class="container">
     <h3>Serie TV</h3>
     <div class="series-list">
+      <div class="no-search" v-if="Object.keys(dataShared.series).length == 0">
+        Non hai eseguito alcuna ricerca
+      </div>
       <div class="serie" v-for="(serie, i) in dataShared.series" :key="i">
         <div
           class="yes-img"
@@ -74,24 +77,31 @@ export default {
 @import "../../assets/style/partials/variables.scss";
 
 .container {
-  width: 1000px;
+  max-width: 1200px;
   margin: 60px auto;
+  background-color: $dark;
 
   h3 {
-    text-align: center;
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: 20px;
+    padding: 10px 0 0 15px;
+  }
+
+  .no-search {
+    width: 300%;
+    padding: 10px 0 0 15px;
   }
   .series-list {
-    width: 1000px;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
 
     .serie {
-      width: 200px;
-      margin: 10px;
-      background-color: $dark;
+      width: 90%;
+      margin: 20px auto;
+      background-color: $darker;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
 
       display: flex;
       flex-direction: column;
@@ -99,8 +109,8 @@ export default {
 
       .yes-img,
       .no-img {
-        height: 200px;
-        width: 200px;
+        height: 350px;
+        width: 100%;
 
         img {
           width: 100%;
@@ -110,7 +120,8 @@ export default {
       }
 
       .no-img {
-        background-color: $lightblue;
+        overflow: hidden; /* nasconde il testo in overflow */
+        background-color: $red;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -121,20 +132,39 @@ export default {
       }
 
       .text {
+        width: 100%;
+        padding: 10px;
+        display: none;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.76);
+
         .title-ita {
           text-align: center;
           font-weight: bold;
           margin: 2px 0 3px 0;
+          overflow: hidden; /* nasconde il testo in overflow */
+          text-overflow: ellipsis; /* aggiunge i "..." */
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1; /* numero di righe da vedere */
         }
 
         .title-original {
+          text-align: center;
           font-style: italic;
+          overflow: hidden; /* nasconde il testo in overflow */
+          text-overflow: ellipsis; /* aggiunge i "..." */
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1; /* numero di righe da vedere */
         }
 
         .flag:not(.en):not(.it):not(.ja) {
           text-transform: uppercase;
           padding: 0 5px;
-          background-color: $lightblue;
+          background-color: $red;
           font-size: 12px;
           font-weight: bold;
           border-radius: 3px;
@@ -145,8 +175,13 @@ export default {
         }
 
         .star-empty {
-          color: $darker;
+          color: $grey;
         }
+      }
+    }
+    .serie:hover {
+      .text {
+        display: block;
       }
     }
   }

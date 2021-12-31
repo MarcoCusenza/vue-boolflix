@@ -2,6 +2,9 @@
   <div class="container">
     <h3>Film</h3>
     <div class="movies-list">
+      <div class="no-search" v-if="Object.keys(dataShared.movies).length == 0">
+        Non hai eseguito alcuna ricerca
+      </div>
       <div class="movie" v-for="(movie, i) in dataShared.movies" :key="i">
         <div
           class="yes-img"
@@ -74,23 +77,32 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/style/partials/variables.scss";
 .container {
-  width: 1000px;
+  max-width: 1200px;
   margin: 60px auto;
+  background-color: $dark;
 
   h3 {
-    text-align: center;
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: 20px;
+    padding: 10px 0 0 15px;
+  }
+
+  .no-search {
+    width: 300%;
+    padding: 10px 0 0 15px;
   }
 
   .movies-list {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
 
     .movie {
-      width: 200px;
-      margin: 10px;
-      background-color: $dark;
+      width: 90%;
+      background-color: $darker;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
 
       display: flex;
       flex-direction: column;
@@ -98,8 +110,8 @@ export default {
 
       .yes-img,
       .no-img {
-        height: 200px;
-        width: 200px;
+        height: 350px;
+        width: 100%;
 
         img {
           width: 100%;
@@ -109,7 +121,7 @@ export default {
       }
 
       .no-img {
-        background-color: $yellow;
+        background-color: $red;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -118,21 +130,41 @@ export default {
         font-weight: bold;
         padding: 15px;
       }
+
       .text {
+        width: 100%;
+        padding: 10px;
+        display: none;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.76);
+
         .title-ita {
           text-align: center;
           font-weight: bold;
           margin: 2px 0 3px 0;
+          overflow: hidden; /* nasconde il testo in overflow */
+          text-overflow: ellipsis; /* aggiunge i "..." */
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1; /* numero di righe da vedere */
         }
 
         .title-original {
+          text-align: center;
           font-style: italic;
+          overflow: hidden; /* nasconde il testo in overflow */
+          text-overflow: ellipsis; /* aggiunge i "..." */
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1; /* numero di righe da vedere */
         }
 
         .flag:not(.en):not(.it):not(.ja) {
           text-transform: uppercase;
           padding: 0 5px;
-          background-color: $yellow;
+          background-color: $red;
           font-size: 12px;
           font-weight: bold;
           border-radius: 3px;
@@ -143,8 +175,14 @@ export default {
         }
 
         .star-empty {
-          color: $darker;
+          color: $grey;
         }
+      }
+    }
+
+    .movie:hover {
+      .text {
+        display: block;
       }
     }
   }

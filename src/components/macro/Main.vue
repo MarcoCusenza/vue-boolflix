@@ -1,20 +1,17 @@
 <template>
   <main>
-    <Searchbar />
     <MoviesList />
     <SeriesList />
   </main>
 </template>
 
 <script>
-import Searchbar from "../commons/Searchbar.vue";
 import MoviesList from "../sections/MoviesList.vue";
 import SeriesList from "../sections/SeriesList.vue";
 
 export default {
   name: "Main",
   components: {
-    Searchbar,
     MoviesList,
     SeriesList,
   },

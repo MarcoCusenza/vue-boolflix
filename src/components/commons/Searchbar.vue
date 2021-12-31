@@ -1,12 +1,12 @@
 <template>
   <div class="searchbar-container">
-    <h2>Cerca un contenuto</h2>
     <div class="search-area">
       <input
         type="text"
         name="searchbar"
         id="searchbar"
         v-model="dataShared.selectVal"
+        placeholder="Cerca un contenuto..."
         @keypress.enter="callApiMovies(), callApiSeries()"
       />
       <button @click="callApiMovies(), callApiSeries()">Cerca</button>
@@ -75,11 +75,14 @@ export default {
   align-items: center;
 
   .search-area * {
-    margin: $small-space;
-    font-size: $normal-text;
+    margin: $smallest-space;
+    font-size: $small-text;
+    padding: 3px 5px;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
 
     button {
-      font-family: 'Courier New', Courier, monospace !important;
+      font-family: "Courier New", Courier, monospace !important;
       font-size: 4px !important;
     }
   }
